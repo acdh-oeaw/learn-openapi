@@ -18,17 +18,20 @@ client.GET('/groups/{groupId}/items', {
         }
     }
 }).then((res) => {
+    let version = res.response.headers.get("Zotero-API-Versio");
     res.data.forEach((item) => {
       console.log(item.library);
     });
 });
 
-let zres = zclient.getItems({
+zclient.get("/groups/:groupId/items", {
     params: {
-      groupId: '12345',
-    },
-    queries: {
+        groupId: "12345",
         limit: 50,
         start: 0,
     }
-})
+}).then((res) => {
+  res.forEach((item) => {
+    console.log(item.library);
+  });
+});
