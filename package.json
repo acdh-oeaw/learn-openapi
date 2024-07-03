@@ -1,0 +1,23 @@
+{
+  "name": "learn-openapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate:zoterotypes": "npx openapi-typescript ./zotero.yaml -o ./lib/zoterotypes.ts",
+    "generate:zoterozodclient": "openapi-zod-client ./zotero.yaml -o ./lib/zoteroclient.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "openapi-fetch": "^0.10.2",
+    "openapi-zod-client": "^1.18.1",
+    "@zodios/core": "10.9.6",
+    "zod": "^3.0.0"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.0.1",
+    "typescript": "^5.5.3"
+  }
+}

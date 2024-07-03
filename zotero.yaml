@@ -1,0 +1,286 @@
+openapi: 3.0.3
+info:
+  title: Zotero Web API
+  description: Zotero Web API
+  version: 3.0.0
+servers:
+  - url: 'https://api.zotero.org'
+    description: Zotero API
+paths:
+  /itemFields:
+    get:
+      tags:
+        - Items
+      operationId: getItemFields
+      description: Getting All Item Fields
+      responses:
+        200:
+          description: OK
+          content: { }
+  /groups/{groupId}/items:
+    get:
+      tags:
+        - Items
+      description: The set of all items in the library.
+      operationId: getItems
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+            default: 2897918
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            format: int64
+            default: 50
+        - name: start
+          in: query
+          schema:
+            type: integer
+            format: int64
+            default: 0
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result'
+
+components:
+  schemas:
+    Result:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            type: string
+          version:
+            type: number
+          library:
+            type: object
+            properties:
+              type:
+                type: string
+              id:
+                type: number
+              name:
+                type: string
+              links:
+                type: object
+                properties:
+                  alternate:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                      type:
+                        type: string
+                    required:
+                      - href
+                      - type
+                required:
+                  - alternate
+            required:
+              - type
+              - id
+              - name
+              - links
+          links:
+            type: object
+            properties:
+              self:
+                type: object
+                properties:
+                  href:
+                    type: string
+                  type:
+                    type: string
+                required:
+                  - href
+                  - type
+              alternate:
+                type: object
+                properties:
+                  href:
+                    type: string
+                  type:
+                    type: string
+                required:
+                  - href
+                  - type
+            required:
+              - self
+              - alternate
+          meta:
+            type: object
+            properties:
+              createdByUser:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  username:
+                    type: string
+                  name:
+                    type: string
+                  links:
+                    type: object
+                    properties:
+                      alternate:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                          type:
+                            type: string
+                        required:
+                          - href
+                          - type
+                    required:
+                      - alternate
+                required:
+                  - id
+                  - username
+                  - name
+                  - links
+              creatorSummary:
+                type: string
+              parsedDate:
+                type: string
+              numChildren:
+                type: number
+            required:
+              - createdByUser
+              - creatorSummary
+              - parsedDate
+              - numChildren
+          data:
+            type: object
+            properties:
+              key:
+                type: string
+              version:
+                type: number
+              itemType:
+                type: string
+              title:
+                type: string
+              creators:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creatorType:
+                      type: string
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                  required:
+                    - creatorType
+                    - firstName
+                    - lastName
+              abstractNote:
+                type: string
+              bookTitle:
+                type: string
+              series:
+                type: string
+              seriesNumber:
+                type: string
+              volume:
+                type: string
+              numberOfVolumes:
+                type: string
+              edition:
+                type: string
+              place:
+                type: string
+              publisher:
+                type: string
+              date:
+                type: string
+              pages:
+                type: string
+              language:
+                type: string
+              ISBN:
+                type: string
+              shortTitle:
+                type: string
+              url:
+                type: string
+              accessDate:
+                type: string
+              archive:
+                type: string
+              archiveLocation:
+                type: string
+              libraryCatalog:
+                type: string
+              callNumber:
+                type: string
+              rights:
+                type: string
+              extra:
+                type: string
+              tags:
+                type: array
+                items: { }
+              collections:
+                type: array
+                items: { }
+              relations:
+                type: object
+                properties: { }
+                required: [ ]
+              dateAdded:
+                type: string
+              dateModified:
+                type: string
+            required:
+              - key
+              - version
+              - itemType
+              - title
+              - creators
+              - abstractNote
+              - bookTitle
+              - series
+              - seriesNumber
+              - volume
+              - numberOfVolumes
+              - edition
+              - place
+              - publisher
+              - date
+              - pages
+              - language
+              - ISBN
+              - shortTitle
+              - url
+              - accessDate
+              - archive
+              - archiveLocation
+              - libraryCatalog
+              - callNumber
+              - rights
+              - extra
+              - tags
+              - collections
+              - relations
+              - dateAdded
+              - dateModified
+        required:
+          - key
+          - version
+          - library
+          - links
+          - meta
+          - data
+
