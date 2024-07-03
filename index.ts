@@ -19,7 +19,7 @@ client.GET('/groups/{groupId}/items', {
     }
 }).then((res) => {
     res.data.forEach((item) => {
-      item.library.
+      console.log(item.library);
     });
 });
 
